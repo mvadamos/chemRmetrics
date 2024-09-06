@@ -1,0 +1,22 @@
+Package: UnscramblR
+Title: CUFARG Chemometrics
+Version: 0.0.0.9000
+Authors@R: 
+    person("Michael", "Adamos", , "michael.adamos@postgrad.curtin.edu.au", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0009-5336-571X"))
+Description: Performs chemometric analysis (multivaraite statistical analysis) involving principal component analysis (PCA) and (in the future) linear discriminant analysis (LDA).
+License: (not sure yet)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+  readxl,
+  janitor,
+  dplyr,
+  readJDX,
+  writexl,
+  plotly,
+  htmlwidgets,
+  webshot2,
+  gtools,
+  gifski
