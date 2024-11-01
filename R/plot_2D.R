@@ -30,7 +30,7 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, colours = NULL){
 
     fig_2D
 
-    htmlwidgets::saveWidget(fig_2D, file = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ''), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), varaible, sep = ''), ').html', sep = ''))
+    htmlwidgets::saveWidget(fig_2D, file = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ''), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), variable, sep = ''), ').html', sep = ''))
   } else{
     col_list <- as.data.frame(strsplit(colours, ', '))
     colnames(col_list)[1] <- 'Colours'
@@ -48,6 +48,6 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, colours = NULL){
 
     fig_2D
 
-    htmlwidgets::saveWidget(fig_2D, file = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ''), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), varaible, sep = ''), ').html', sep = ''))
+    htmlwidgets::saveWidget(fig_2D, file = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ''), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), variable, sep = ''), ').html', sep = ''))
   }
 }
