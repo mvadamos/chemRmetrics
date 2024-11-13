@@ -23,7 +23,7 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, colours = NULL){
 
     fig_2D <- fig_2D %>%
       plotly::layout(
-        title = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ' '), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), varaible, sep = ''), ')', sep = ''),
+        title = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ' '), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
         scene = list(bgcolor = "#FFFFFF"),
         xaxis = list(zeroline = F,showline = T, showgrid = FALSE, ticks = 'outside', title = paste('PC', pc_num_1, sep = '')),
         yaxis = list(zeroline = F, showline = T, showgrid = FALSE, ticks = 'outside',title = paste('PC', pc_num_2, sep = '')))
@@ -41,7 +41,7 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, colours = NULL){
 
     fig_2D <- fig_2D %>%
       plotly::layout(
-        title = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ' '), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), varaible, sep = ''), ')', sep = ''),
+        title = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ' '), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
         scene = list(bgcolor = "#FFFFFF"),
         xaxis = list(zeroline = F,showline = T, showgrid = FALSE, ticks = 'outside', title = paste('PC', pc_num_1, sep = '')),
         yaxis = list(zeroline = F, showline = T, showgrid = FALSE, ticks = 'outside', title = paste('PC', pc_num_2, sep = '')))
