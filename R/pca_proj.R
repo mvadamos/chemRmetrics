@@ -17,6 +17,7 @@
 #' to consider
 #' @return A dataframe holding the original dataset with the projection data
 #' appended. This dataframe also holds the PC scores for both datasets
+
 pca_proj <- function(df, df_proj, non_num, num_pcs){
   myPr <- prcomp(df[, -c(1:non_num)], rank. = num_pcs)
   data_pc <- cbind(df, myPr$x[,1:num_pcs])
