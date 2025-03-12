@@ -1,5 +1,5 @@
-Package: ChemRmetrics
-Title: CUFARG Chemometrics
+Package: chemRmetrics
+Title: Multivariate Statistical Analysis of Chemical Data
 Version: 0.0.0.9000
 Authors@R: 
     person("Michael", "Adamos", , "michael.adamos@postgrad.curtin.edu.au", role = c("aut", "cre"),
