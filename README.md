@@ -2,7 +2,9 @@
 
 ## Multivariate Statistical Analysis of Chemical Data
 
-This is an accessible package in R that can be used to perform multivaraite statistical analysis on chemical data. Currently with this package, you can:
+This is an accessible package in R that can be used to perform multivaraite statistical analysis on chemical data. 
+
+Currently with this package, you can:
 
 * Import data from appropriated formatted excel spreadsheet
 * Import data from appropriately labelled JCAMP-DX files
