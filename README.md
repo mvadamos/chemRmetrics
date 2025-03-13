@@ -20,3 +20,5 @@ Currently with this package, you can:
 * Create scree plots
 * Create loadings plots
 * Export all data associated with the PCA model to plot in a software of your choice :)
+
+## Watch this video for a full guide on how to use the chemRmetrics package!
