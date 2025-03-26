@@ -30,7 +30,7 @@ Currently with this package, you can:
 Here is the easiest way to install the chemRmetrics package:
 
 1. Install the devtools package - `install.packages('devtools')`
-2. Install chemRmetrics package using devtools package - `devtools::install_github(mvadamos/chemRmetrics)`
+2. Install chemRmetrics package using devtools package - `devtools::install_github('mvadamos/chemRmetrics')`
 
 ## Known Issues (Work in Progress)
 
