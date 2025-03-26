@@ -23,7 +23,7 @@ Currently with this package, you can:
 
 ## Read this document to learn how to use chemRmetrics!
 
-![chemRmetrics User Guide!](chemRmetrics-User-Guide.html)
+![chemRmetrics User Guide!](chemRmetrics-User-Guide.html "download")
 
 ## How to Install the chemRmetrics Package
 
