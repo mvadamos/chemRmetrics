@@ -9,10 +9,14 @@
 #' @return A dataframe with min-max normalised values
 #' @export
 data_norm_mm <- function(df, non_num){
+  # Removing non-numeric variables from df
   Variables <- df[, c(1:non_num)]
+  # Defining min-max normalising function
   norm <- function(x){
     (x-min(x))/(max(x)-min(x))
   }
+  # Applying min-max normalising function to each row in df
   norm_scale <- t(apply(df[, -c(1:non_num)], 1, norm))
+  # Recreating original dataset with min-max normalised values
   Raw_Spectra <- cbind(Variables, norm_scale)
 }

@@ -18,25 +18,32 @@
 #' @return A dataframe of the input data
 #' @export
 load_data <- function(inpath, non_num, ftype, fstruc, delim){
+  # Checks for 'xlsx' file type
   if (grepl('xlsx', ftype, ignore.case = T)){
+    # Load in data from 'xlsx' file
     Raw_Spectra <- readxl::read_excel(inpath)
     first_num <- non_num + 1
+    # Ensures all numeric values are numeric
     for (i in first_num:ncol(Raw_Spectra)){
       Raw_Spectra[i] <- as.numeric(unlist((Raw_Spectra[i])))
     }
     Raw_Spectra
+    # Checks for 'jdx' file type
   } else if(grepl('jdx', ftype, ignore.case = T)){
-
+    # Extracting variables from file name structure
     variables <- as.data.frame(strsplit(fstruc, delim))
     num_var <- nrow(variables)
+    # Determining list of files from specified folder using 'inpath' argument
     file_list <- as.data.frame(list.files(path = inpath))
     file_list_path <- as.data.frame(list.files(path = inpath, full.names = TRUE))
+    # Reading in first file and creating dataframe
     first_entry <- readJDX::readJDX(file = file_list_path[1, 1])
     raw_spectra <- as.data.frame(t(first_entry[[4]]))
     raw_spectra <- raw_spectra[1, ]
     raw_spectra <- raw_spectra %>%
       janitor::row_to_names(row_number = 1)
 
+    # Adding data from all remaining files to dataframe
     for (i in 1:nrow(file_list_path)) {
       JDX_data <- readJDX::readJDX(file = file_list_path[i, 1])
       spec_data <- as.data.frame(t(JDX_data[[4]]))
@@ -48,8 +55,9 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim){
     var_db <- var_db %>%
       janitor::row_to_names(row_number = 1)
 
+    # Adding varaible information from filename to dataframe
     for (i in 1:nrow(file_list)) {
-      file_split <- strsplit(file_list[i, 1], '_')
+      file_split <- strsplit(file_list[i, 1], delim)
       file_var <- as.data.frame(t(file_split[[1]]))
       colnames(file_var)[1:num_var] <- colnames(var_db)[1:num_var]
       var_db <- rbind(var_db, file_var[ , 1:num_var])
@@ -58,6 +66,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim){
     raw_spectra <- cbind(var_db, raw_spectra)
     colnames(raw_spectra)[1] <- 'Filename'
     raw_spectra
+    # Provides warning for unsupported file types
   } else{
     print(paste(paste("Error: File type '", ftype, sep = ''), "' is not supported", sep = ''))
   }

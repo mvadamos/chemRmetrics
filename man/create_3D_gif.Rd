@@ -10,7 +10,9 @@ create_3D_gif(
   pc_num_1,
   pc_num_2,
   pc_num_3,
+  msize = 12,
   colours = NULL,
+  proj = FALSE,
   num_images
 )
 }
@@ -26,10 +28,17 @@ plot)}
 
 \item{pc_num_3}{The third principal component to be used}
 
+\item{msize}{The variable used to adjust the size of the markers, must be a numeric
+value (default = 12)}
+
 \item{colours}{A provided list of colours for a colour palette if the
 preset colour palette is not desired. This list must be separated using ', '
 (e.g 'red, green, blue'). The number of colours provided must be equal to or
 greater than the number of unique classes for the variable chosen.}
+
+\item{proj}{Set to TRUE if the data being plotted involves a projected
+set of data (default = FALSE). This will change the marker symbol of all projected data to
+a diamond.}
 
 \item{num_images}{The number of images to be collated to form the gif file}
 }

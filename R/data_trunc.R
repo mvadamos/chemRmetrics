@@ -12,6 +12,7 @@
 #' @return A truncated version of the input dataframe
 #' @export
 data_trunc <- function(df, non_num, upper, lower){
+  # Creating a dataframe with the column names (x-axis values) of df as a rows
   names <- as.data.frame(t(colnames(df)))
   colnames(names) <- colnames(df)
   first_num = non_num + 1
@@ -19,8 +20,10 @@ data_trunc <- function(df, non_num, upper, lower){
     names[i] <- as.numeric(unlist((names[i])))
   }
   df <- rbind(names, df)
+  # Checks for the closest value to the 'upper' and 'lower' values provided
   close_upper <- max.col(-abs(upper - df[1, -c(1:non_num)])) + non_num
   close_lower <- max.col(-abs(lower - df[1, -c(1:non_num)])) + non_num
+  # Recreating original dataset with truncated values
   Raw_Spectra <- df[, -c(close_lower:close_upper)]
   Raw_Spectra <- Raw_Spectra %>%
     janitor::row_to_names(row_number = 1)
