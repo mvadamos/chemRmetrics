@@ -39,15 +39,15 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                                 type = 'scatter3d',
                                 # Selecting plot mode as markers
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    z = df[[paste('PC', pc_num_3, sep = '')]],
-                    # Colours are determined using the variable column specified using the 'variable' argument
-                    color = df[[variable]],
-                    # Symbols are determined using the 'proj' column creating with the 'pca()' or pca_proj() functions
-                    symbol = ~proj,
-                    # Size of the marker specified using the 'msize' argument
-                    size = msize
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            z = df[[paste('PC', pc_num_3, sep = '')]],
+                            # Colours are determined using the variable column specified using the 'variable' argument
+                            color = df[[variable]],
+                            # Symbols are determined using the 'proj' column creating with the 'pca()' or pca_proj() functions
+                            symbol = ~proj,
+                            # Size of the marker specified using the 'msize' argument
+                            size = msize
         )
 
       # Rotating the plot for each plot up to the number of images specified to create the gif using the 'num_images' argument
@@ -62,7 +62,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                          xaxis = list(zeroline = F,showline = T, mirror = T, ticks = 'outside', title = paste(paste('PC', pc_num_1, sep = ''), paste(paste(paste( '(', df[pc_num_1 + 1, ncol(df)], sep = ''), sep = ''), ')', sep = ''), sep = ' ')),
                          yaxis = list(zeroline = F, showline = T, mirror = T, ticks = 'outside', title = paste(paste('PC', pc_num_2, sep = ''), paste(paste(paste( '(', df[pc_num_2 + 1, ncol(df)], sep = ''), sep = ''), ')', sep = ''), sep = ' ')),
                          zaxis = list(zeroline = F,showline = T,mirror = T, ticks = 'outside', title = paste(paste('PC', pc_num_3, sep = ''), paste(paste(paste( '(', df[pc_num_3 + 1, ncol(df)], sep = ''), sep = ''), ')', sep = ''), sep = ' ')),
-                        # Rotating the plot
+                         # Rotating the plot
                          camera = list(eye = list(x = cos(i)*2, y = sin(i)*2, z = 0.2)))
           )
 
@@ -96,12 +96,12 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                                 symbols = c('Original' = 'circle', 'Projected' = 'diamond'),
                                 type = 'scatter3d',
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    z = df[[paste('PC', pc_num_3, sep = '')]],
-                    color = df[[variable]],
-                    symbol = ~proj,
-                    size = msize
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            z = df[[paste('PC', pc_num_3, sep = '')]],
+                            color = df[[variable]],
+                            symbol = ~proj,
+                            size = msize
         )
 
       for (i in seq(0, 2*pi, by = (2*pi)/num_images)){
@@ -138,11 +138,11 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                                 colors = rainbow(n_distinct(df[[variable]])),
                                 type = 'scatter3d',
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    z = df[[paste('PC', pc_num_3, sep = '')]],
-                    color = df[[variable]],
-                    size = msize
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            z = df[[paste('PC', pc_num_3, sep = '')]],
+                            color = df[[variable]],
+                            size = msize
         )
 
       for (i in seq(0, 2*pi, by = (2*pi)/num_images)){
@@ -179,11 +179,11 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                                 colors = col_list[['Colours']],
                                 type = 'scatter3d',
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    z = df[[paste('PC', pc_num_3, sep = '')]],
-                    color = df[[variable]],
-                    size = msize
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            z = df[[paste('PC', pc_num_3, sep = '')]],
+                            color = df[[variable]],
+                            size = msize
         )
 
       for (i in seq(0, 2*pi, by = (2*pi)/num_images)){

@@ -35,14 +35,14 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
                                 type = 'scatter',
                                 # Selecting plot mode as markers
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    # Colours are determined using the variable column specified using the 'variable' argument
-                    color = df[[variable]],
-                    # Symbols are determined using the 'proj' column creating with the 'pca()' or pca_proj() functions
-                    symbol = ~proj,
-                    # Size of the marker specified using the 'msize' argument
-                    size = msize)
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            # Colours are determined using the variable column specified using the 'variable' argument
+                            color = df[[variable]],
+                            # Symbols are determined using the 'proj' column creating with the 'pca()' or pca_proj() functions
+                            symbol = ~proj,
+                            # Size of the marker specified using the 'msize' argument
+                            size = msize)
 
       fig_2D <- fig_2D %>%
         # Establishing the plot layout
@@ -67,11 +67,11 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
                                 symbols = c('Original' = 'circle', 'Projected' = 'diamond'),
                                 type = 'scatter',
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    color = df[[variable]],
-                    symbol = ~proj,
-                    size = msize)
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            color = df[[variable]],
+                            symbol = ~proj,
+                            size = msize)
 
       fig_2D <- fig_2D %>%
         plotly::layout(
@@ -91,10 +91,10 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
                                 colors = rainbow(n_distinct(df[[variable]])),
                                 type = 'scatter',
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    color = df[[variable]],
-                    size = msize)
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            color = df[[variable]],
+                            size = msize)
 
       fig_2D <- fig_2D %>%
         plotly::layout(
@@ -115,10 +115,10 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
                                 colors = col_list[['Colours']],
                                 type = 'scatter',
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    color = df[[variable]],
-                    size = msize)
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            color = df[[variable]],
+                            size = msize)
 
       fig_2D <- fig_2D %>%
         plotly::layout(

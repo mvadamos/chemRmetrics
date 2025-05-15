@@ -36,15 +36,15 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                                 type = 'scatter3d',
                                 # Selecting plot mode as markers
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    z = df[[paste('PC', pc_num_3, sep = '')]],
-                    # Colours are determined using the variable column specified using the 'variable' argument
-                    color = df[[variable]],
-                    # Symbols are determined using the 'proj' column creating with the 'pca()' or pca_proj() functions
-                    symbol = ~proj,
-                    # Size of the marker specified using the 'msize' argument
-                    size = msize
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            z = df[[paste('PC', pc_num_3, sep = '')]],
+                            # Colours are determined using the variable column specified using the 'variable' argument
+                            color = df[[variable]],
+                            # Symbols are determined using the 'proj' column creating with the 'pca()' or pca_proj() functions
+                            symbol = ~proj,
+                            # Size of the marker specified using the 'msize' argument
+                            size = msize
         )
 
       fig_3D <- fig_3D %>%
@@ -73,12 +73,12 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                                 symbols = c('Original' = 'circle', 'Projected' = 'diamond'),
                                 type = 'scatter3d',
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    z = df[[paste('PC', pc_num_3, sep = '')]],
-                    color = df[[variable]],
-                    symbol = ~proj,
-                    size = msize
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            z = df[[paste('PC', pc_num_3, sep = '')]],
+                            color = df[[variable]],
+                            symbol = ~proj,
+                            size = msize
         )
 
       fig_3D <- fig_3D %>%
@@ -102,11 +102,11 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                                 colors = rainbow(n_distinct(df[[variable]])),
                                 type = 'scatter3d',
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    z = df[[paste('PC', pc_num_3, sep = '')]],
-                    color = df[[variable]],
-                    size = msize
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            z = df[[paste('PC', pc_num_3, sep = '')]],
+                            color = df[[variable]],
+                            size = msize
         )
 
       fig_3D <- fig_3D %>%
@@ -130,11 +130,11 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                                 colors = col_list[['Colours']],
                                 type = 'scatter3d',
                                 mode = 'markers') %>%
-        add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
-                    y = df[[paste('PC', pc_num_2, sep = '')]],
-                    z = df[[paste('PC', pc_num_3, sep = '')]],
-                    color = df[[variable]],
-                    size = msize
+        plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
+                            y = df[[paste('PC', pc_num_2, sep = '')]],
+                            z = df[[paste('PC', pc_num_3, sep = '')]],
+                            color = df[[variable]],
+                            size = msize
         )
 
       fig_3D <- fig_3D %>%
