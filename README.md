@@ -38,3 +38,4 @@ Here are a few known issues that have been encountered when using the chemRmetri
 
  * Hidden files may interfere with `load_data()` function when loadings JDX files. Might throw error 'This file is not a jdx file', the hidden file should be visible in Rstudio file view, just remove file to solve issue.
  * Computer firewall may prevent `create_3D_gif()` function form operating properly, usually will produce a blank gif file. Not sure how to resolve this issue, it is something to do with webshot, this function does not work on my 'work computer' but it does work on my 'personal computer'.
+ * Plotting functions might give warning similar to 'x and y need to be defined'. Creating a new R project (in a new folder) for analysis has fixed this problem in the past.
