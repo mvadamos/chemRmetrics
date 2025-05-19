@@ -44,7 +44,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                             # Symbols are determined using the 'proj' column creating with the 'pca()' or pca_proj() functions
                             symbol = ~proj,
                             # Size of the marker specified using the 'msize' argument
-                            size = msize
+                            marker = list(size = msize)
         )
 
       fig_3D <- fig_3D %>%
@@ -78,7 +78,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                             z = df[[paste('PC', pc_num_3, sep = '')]],
                             color = df[[variable]],
                             symbol = ~proj,
-                            size = msize
+                            marker = list(size = msize)
         )
 
       fig_3D <- fig_3D %>%
@@ -106,7 +106,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
                             color = df[[variable]],
-                            size = msize
+                            marker = list(size = msize)
         )
 
       fig_3D <- fig_3D %>%
@@ -134,7 +134,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
                             color = df[[variable]],
-                            size = msize
+                            marker = list(size = msize)
         )
 
       fig_3D <- fig_3D %>%

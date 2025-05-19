@@ -47,7 +47,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                             # Symbols are determined using the 'proj' column creating with the 'pca()' or pca_proj() functions
                             symbol = ~proj,
                             # Size of the marker specified using the 'msize' argument
-                            size = msize
+                            marker = list(size = msize)
         )
 
       # Rotating the plot for each plot up to the number of images specified to create the gif using the 'num_images' argument
@@ -101,7 +101,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                             z = df[[paste('PC', pc_num_3, sep = '')]],
                             color = df[[variable]],
                             symbol = ~proj,
-                            size = msize
+                            marker = list(size = msize)
         )
 
       for (i in seq(0, 2*pi, by = (2*pi)/num_images)){
@@ -142,7 +142,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
                             color = df[[variable]],
-                            size = msize
+                            marker = list(size = msize)
         )
 
       for (i in seq(0, 2*pi, by = (2*pi)/num_images)){
@@ -183,7 +183,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
                             color = df[[variable]],
-                            size = msize
+                            marker = list(size = msize)
         )
 
       for (i in seq(0, 2*pi, by = (2*pi)/num_images)){

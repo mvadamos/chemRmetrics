@@ -42,7 +42,7 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
                             # Symbols are determined using the 'proj' column creating with the 'pca()' or pca_proj() functions
                             symbol = ~proj,
                             # Size of the marker specified using the 'msize' argument
-                            size = msize)
+                            marker = list(size = msize))
 
       fig_2D <- fig_2D %>%
         # Establishing the plot layout
@@ -71,7 +71,7 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             color = df[[variable]],
                             symbol = ~proj,
-                            size = msize)
+                            marker = list(size = msize))
 
       fig_2D <- fig_2D %>%
         plotly::layout(
@@ -94,7 +94,7 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             color = df[[variable]],
-                            size = msize)
+                            marker = list(size = msize))
 
       fig_2D <- fig_2D %>%
         plotly::layout(
@@ -118,7 +118,7 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             color = df[[variable]],
-                            size = msize)
+                            marker = list(size = msize))
 
       fig_2D <- fig_2D %>%
         plotly::layout(
