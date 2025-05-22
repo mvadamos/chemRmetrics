@@ -30,10 +30,10 @@ plot)}
 \item{msize}{The variable used to adjust the size of the markers, must be a numeric
 value (default = 12)}
 
-\item{colours}{A provided list of colours for a colour palette if the
-preset colour palette is not desired. This list must be separated using ', '
-(e.g 'red, green, blue'). The number of colours provided must be equal to or
-greater than the number of unique classes for the variable chosen.}
+\item{colours}{A provided colour palette if the preset colour palette is not desired.
+This palette must be prepared as follows: colours = c('colour1', 'colour2', ...)
+The number of colours provided must be equal to or greater than the number of unique classes
+for the variable chosen.}
 
 \item{proj}{Set to TRUE if the data being plotted involves a projected
 set of data (default = FALSE). This will change the marker symbol of all projected data to

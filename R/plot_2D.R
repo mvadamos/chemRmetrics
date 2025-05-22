@@ -11,10 +11,10 @@
 #' @param pc_num_2 The second principal component to be used
 #' @param msize The variable used to adjust the size of the markers, must be a numeric
 #' value (default = 12)
-#' @param colours A provided list of colours for a colour palette if the
-#' preset colour palette is not desired. This list must be separated using ', '
-#' (e.g 'red, green, blue'). The number of colours provided must be equal to or
-#' greater than the number of unique classes for the variable chosen.
+#' @param colours A provided colour palette if the preset colour palette is not desired.
+#' This palette must be prepared as follows: colours = c('colour1', 'colour2', ...)
+#' The number of colours provided must be equal to or greater than the number of unique classes
+#' for the variable chosen.
 #' @param proj Set to TRUE if the data being plotted involves a projected
 #' set of data (default = FALSE). This will change the marker symbol of all projected data to
 #' a diamond.
@@ -57,13 +57,9 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
       # Exporting 2D scatter plot as a html file
       htmlwidgets::saveWidget(fig_2D, file = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ''), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), variable, sep = ''), ').html', sep = ''))
     } else{
-      # Creating dataframe for custom colours specified using the 'colours' argument
-      col_list <- as.data.frame(strsplit(colours, ', '))
-      colnames(col_list)[1] <- 'Colours'
-
       fig_2D <- plotly::plot_ly(df,
-                                # Colour palette set as custom colour palette in col_list specified using the 'colours' argument
-                                colors = col_list[['Colours']],
+                                # Colour palette set as custom colour palette specified using the 'colours' argument
+                                colors = colours,
                                 symbols = c('Original' = 'circle', 'Projected' = 'diamond'),
                                 type = 'scatter',
                                 mode = 'markers') %>%
@@ -107,12 +103,8 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
 
       htmlwidgets::saveWidget(fig_2D, file = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ''), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), variable, sep = ''), ').html', sep = ''))
     } else{
-      col_list <- as.data.frame(strsplit(colours, ', '))
-      colnames(col_list)[1] <- 'Colours'
-
-
       fig_2D <- plotly::plot_ly(df,
-                                colors = col_list[['Colours']],
+                                colors = colours,
                                 type = 'scatter',
                                 mode = 'markers') %>%
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
