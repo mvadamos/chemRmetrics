@@ -7,10 +7,12 @@ This is an accessible package in R that can be used to perform multivaraite stat
 Currently with this package, you can:
 
 * Import data from appropriated formatted excel spreadsheet
+* Import data from appropriately labelled txt files
+* Import data from appropriately labelled csv files
 * Import data from appropriately labelled JCAMP-DX files
 * Perform a range of data pre-processing:
   * Truncating
-  *  Interpolation
+  * Interpolation
   * Normalising to unity
 * Perform Principal Component Analysis (PCA)
 * Perform a projection of a separate data set onto an existing PCA model

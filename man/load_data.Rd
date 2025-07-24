@@ -4,7 +4,7 @@
 \alias{load_data}
 \title{Load Raw Data from Excel file or Directory with JDX Files}
 \usage{
-load_data(inpath, non_num, ftype, fstruc, delim)
+load_data(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xvar)
 }
 \arguments{
 \item{inpath}{Path to the raw data input file or directory containing raw
@@ -19,6 +19,15 @@ and 'jdx' file types are supported}
 \item{fstruc}{The filename structure for the jdx files with variables labelled}
 
 \item{delim}{The delimiter used to separate descripters in the jdx filenames}
+
+\item{skip}{The number of rows at the top of the text or csv file to be skipped when
+reading in the data (default = 0)}
+
+\item{yvar}{The column that contains the y-varaible in the text or csv file
+(e.g. the column that contains the wavenumbers for infrared spectral data)}
+
+\item{xvar}{The column that contains the x-varaible in the text or csv file
+(e.g. the column that contains the absorbance/transmittance for infrared spectral data)}
 }
 \value{
 A dataframe of the input data
