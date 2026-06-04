@@ -19,4 +19,6 @@ Imports:
   htmlwidgets,
   webshot2,
   gtools,
-  gifski
+  gifski, 
+  MALDIquantForeign,
+  MALDIquant
