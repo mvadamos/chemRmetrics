@@ -25,7 +25,7 @@ data_trunc <- function(df, non_num, upper, lower){
   close_lower <- max.col(-abs(lower - df[1, -c(1:non_num)])) + non_num
   # Recreating original dataset with truncated values
   Raw_Spectra <- df[, -c(close_lower:close_upper)]
-  Raw_Spectra <- Raw_Spectra %>%
+  Raw_Spectra <- Raw_Spectra |>
     janitor::row_to_names(row_number = 1)
   Raw_Spectra
 }

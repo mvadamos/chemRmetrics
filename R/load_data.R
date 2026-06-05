@@ -46,7 +46,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     first_entry <- readJDX::readJDX(file = file_list_path[1, 1])
     raw_spectra <- as.data.frame(t(first_entry[[4]]))
     raw_spectra <- raw_spectra[1, ]
-    raw_spectra <- raw_spectra %>%
+    raw_spectra <- raw_spectra |>
       janitor::row_to_names(row_number = 1)
 
     # Adding data from all remaining files to dataframe
@@ -58,7 +58,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
       raw_spectra <- rbind(raw_spectra, spec_data)
     }
     var_db <- as.data.frame(t(variables))
-    var_db <- var_db %>%
+    var_db <- var_db |>
       janitor::row_to_names(row_number = 1)
 
     # Adding varaible information from filename to dataframe
@@ -84,7 +84,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     first_entry <- read.delim(file_list_path[1, 1], skip = skip)
     raw_spectra <- as.data.frame(t(first_entry))
     raw_spectra <- raw_spectra[yvar, ]
-    raw_spectra <- raw_spectra %>%
+    raw_spectra <- raw_spectra |>
       janitor::row_to_names(row_number = 1)
 
     # Adding data from all remaining files to dataframe
@@ -96,7 +96,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
       raw_spectra <- rbind(raw_spectra, spec_data)
     }
     var_db <- as.data.frame(t(variables))
-    var_db <- var_db %>%
+    var_db <- var_db |>
       janitor::row_to_names(row_number = 1)
 
     # Adding varaible information from filename to dataframe
@@ -124,7 +124,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     first_entry <- read.csv(file_list_path[1, 1], skip = skip)
     raw_spectra <- as.data.frame(t(first_entry))
     raw_spectra <- raw_spectra[yvar, ]
-    raw_spectra <- raw_spectra %>%
+    raw_spectra <- raw_spectra |>
       janitor::row_to_names(row_number = 1)
 
     # Adding data from all remaining files to dataframe
@@ -136,7 +136,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
       raw_spectra <- rbind(raw_spectra, spec_data)
     }
     var_db <- as.data.frame(t(variables))
-    var_db <- var_db %>%
+    var_db <- var_db |>
       janitor::row_to_names(row_number = 1)
 
     # Adding varaible information from filename to dataframe

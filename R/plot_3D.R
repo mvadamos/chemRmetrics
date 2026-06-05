@@ -35,7 +35,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                                 # Setting plot type as a scatter plot
                                 type = 'scatter3d',
                                 # Selecting plot mode as markers
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
@@ -47,7 +47,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                             marker = list(size = msize)
         )
 
-      fig_3D <- fig_3D %>%
+      fig_3D <- fig_3D |>
         # Establishing the plot layout
         plotly::layout(
           title = paste(paste(paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), ', PC', sep = ''), pc_num_2, sep = ' '), 'and PC', sep = ' '), pc_num_3, sep = ''), '3D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
@@ -68,7 +68,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                                 colors = colours,
                                 symbols = c('Original' = 'circle', 'Projected' = 'diamond'),
                                 type = 'scatter3d',
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
@@ -77,7 +77,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                             marker = list(size = msize)
         )
 
-      fig_3D <- fig_3D %>%
+      fig_3D <- fig_3D |>
         plotly::layout(
           title = paste(paste(paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), ', PC', sep = ''), pc_num_2, sep = ' '), 'and PC', sep = ' '), pc_num_3, sep = ''), '3D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
           scene = list(bgcolor = "#FFFFFF",
@@ -105,7 +105,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                             marker = list(size = msize)
         )
 
-      fig_3D <- fig_3D %>%
+      fig_3D <- fig_3D |>
         plotly::layout(
           title = paste(paste(paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), ', PC', sep = ''), pc_num_2, sep = ' '), 'and PC', sep = ' '), pc_num_3, sep = ''), '3D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
           scene = list(bgcolor = "#FFFFFF",
@@ -130,7 +130,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
                             marker = list(size = msize)
         )
 
-      fig_3D <- fig_3D %>%
+      fig_3D <- fig_3D |>
         plotly::layout(
           title = paste(paste(paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), ', PC', sep = ''), pc_num_2, sep = ' '), 'and PC', sep = ' '), pc_num_3, sep = ''), '3D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
           scene = list(bgcolor = "#FFFFFF",

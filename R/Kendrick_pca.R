@@ -61,7 +61,7 @@ Kendrick_pca <- function(df, num_pcs, unit_mass, unit_name, SNR, scale, trunc = 
   cumulative_prop <- as.data.frame(myPr_sum$importance)
   cumulative_prop <- cumulative_prop[3, 1:num_pcs]
   cumulative_prop$PC0 <- c(0)
-  cumulative_prop <- cumulative_prop %>% relocate(PC0)
+  cumulative_prop <- cumulative_prop |> relocate(PC0)
   cumulative_prop <- t(cumulative_prop)
 
   # Creating scree plot and exporting it as a PDF

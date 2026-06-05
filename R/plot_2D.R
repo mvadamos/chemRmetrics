@@ -34,7 +34,7 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
                                 # Setting plot type as a scatter plot
                                 type = 'scatter',
                                 # Selecting plot mode as markers
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             # Colours are determined using the variable column specified using the 'variable' argument
@@ -44,7 +44,7 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
                             # Size of the marker specified using the 'msize' argument
                             marker = list(size = msize))
 
-      fig_2D <- fig_2D %>%
+      fig_2D <- fig_2D |>
         # Establishing the plot layout
         plotly::layout(
           title = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ' '), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
@@ -62,14 +62,14 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
                                 colors = colours,
                                 symbols = c('Original' = 'circle', 'Projected' = 'diamond'),
                                 type = 'scatter',
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             color = df[[variable]],
                             symbol = ~proj,
                             marker = list(size = msize))
 
-      fig_2D <- fig_2D %>%
+      fig_2D <- fig_2D |>
         plotly::layout(
           title = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ' '), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
           scene = list(bgcolor = "#FFFFFF"),
@@ -86,13 +86,13 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
       fig_2D <- plotly::plot_ly(df,
                                 colors = rainbow(n_distinct(df[[variable]])),
                                 type = 'scatter',
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             color = df[[variable]],
                             marker = list(size = msize))
 
-      fig_2D <- fig_2D %>%
+      fig_2D <- fig_2D |>
         plotly::layout(
           title = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ' '), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
           scene = list(bgcolor = "#FFFFFF"),
@@ -106,13 +106,13 @@ plot_2D <- function(df, variable, pc_num_1, pc_num_2, msize = 12, colours = NULL
       fig_2D <- plotly::plot_ly(df,
                                 colors = colours,
                                 type = 'scatter',
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             color = df[[variable]],
                             marker = list(size = msize))
 
-      fig_2D <- fig_2D %>%
+      fig_2D <- fig_2D |>
         plotly::layout(
           title = paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), 'and PC', sep = ' '), pc_num_2, sep = ' '), '2D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
           scene = list(bgcolor = "#FFFFFF"),

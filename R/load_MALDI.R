@@ -25,7 +25,7 @@ load_MALDI <- function(inpath, ref, nmass){
   raw_data_blc <- MALDIquant::removeBaseline(raw_data, method = 'SNIP')
 
   # Extract Mass and Intensity Data
-  mass_list <- as.data.frame(t(MALDIquant::mass(raw_data_blc[[1]]))) %>%
+  mass_list <- as.data.frame(t(MALDIquant::mass(raw_data_blc[[1]]))) |>
     janitor::row_to_names(1)
 
   sample_num_list <- as.data.frame(matrix(ncol = 1, nrow = length(raw_data_blc)))

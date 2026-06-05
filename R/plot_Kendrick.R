@@ -123,12 +123,12 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
 
     fig_2D_KMD <- plotly::plot_ly(df,
                                   type = 'scatter',
-                                  mode = 'markers') %>%
+                                  mode = 'markers') |>
       plotly::add_markers(x = peaks_KMD[, 1],
                           y = peaks_KMD[, 2],
                           marker = list(size = peaks_intensity[, 2]*5))
 
-    fig_2D_KMD <- fig_2D_KMD %>%
+    fig_2D_KMD <- fig_2D_KMD |>
       plotly::layout(
         title = paste('Repeating Unit:', unit_name, sep = ' '),
         scene = list(bgcolor = "#FFFFFF"),
@@ -141,12 +141,12 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
 
     fig_2D_KMR <- plotly::plot_ly(df,
                                   type = 'scatter',
-                                  mode = 'markers') %>%
+                                  mode = 'markers') |>
       plotly::add_markers(x = peaks_mass[, 1],
                           y = peaks_KMR[, 1],
                           marker = list(size = peaks_intensity[, 2]*5))
 
-    fig_2D_KMR <- fig_2D_KMR %>%
+    fig_2D_KMR <- fig_2D_KMR |>
       plotly::layout(
         title = paste('Repeating Unit:', unit_name, sep = ' '),
         scene = list(bgcolor = "#FFFFFF"),

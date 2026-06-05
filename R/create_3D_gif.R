@@ -38,7 +38,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                                 # Setting plot type as a scatter plot
                                 type = 'scatter3d',
                                 # Selecting plot mode as markers
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
@@ -53,7 +53,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
       # Rotating the plot for each plot up to the number of images specified to create the gif using the 'num_images' argument
       for (i in seq(0, 2*pi, by = (2*pi)/num_images)){
         plot_iteration <- paste('image', i/((2*pi)/num_images), sep = '_')
-        fig_3D <- fig_3D %>%
+        fig_3D <- fig_3D |>
           # Establishing the plot layout
           plotly::layout(
             title = paste(paste(paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), ', PC', sep = ''), pc_num_2, sep = ' '), 'and PC', sep = ' '), pc_num_3, sep = ''), '3D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
@@ -91,7 +91,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
                                 colors = colours,
                                 symbols = c('Original' = 'circle', 'Projected' = 'diamond'),
                                 type = 'scatter3d',
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
@@ -102,7 +102,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
 
       for (i in seq(0, 2*pi, by = (2*pi)/num_images)){
         plot_iteration <- paste('image', i/((2*pi)/num_images), sep = '_')
-        fig_3D <- fig_3D %>%
+        fig_3D <- fig_3D |>
           plotly::layout(
             title = paste(paste(paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), ', PC', sep = ''), pc_num_2, sep = ' '), 'and PC', sep = ' '), pc_num_3, sep = ''), '3D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
             scene = list(bgcolor = "#FFFFFF",
@@ -133,7 +133,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
       fig_3D <- plotly::plot_ly(df,
                                 colors = rainbow(n_distinct(df[[variable]])),
                                 type = 'scatter3d',
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
@@ -143,7 +143,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
 
       for (i in seq(0, 2*pi, by = (2*pi)/num_images)){
         plot_iteration <- paste('image', i/((2*pi)/num_images), sep = '_')
-        fig_3D <- fig_3D %>%
+        fig_3D <- fig_3D |>
           plotly::layout(
             title = paste(paste(paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), ', PC', sep = ''), pc_num_2, sep = ' '), 'and PC', sep = ' '), pc_num_3, sep = ''), '3D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
             scene = list(bgcolor = "#FFFFFF",
@@ -171,7 +171,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
       fig_3D <- plotly::plot_ly(df,
                                 colors = colours,
                                 type = 'scatter3d',
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
@@ -181,7 +181,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
 
       for (i in seq(0, 2*pi, by = (2*pi)/num_images)){
         plot_iteration <- paste('image', i/((2*pi)/num_images), sep = '_')
-        fig_3D <- fig_3D %>%
+        fig_3D <- fig_3D |>
           plotly::layout(
             title = paste(paste(paste(paste(paste(paste(paste(paste('PC', pc_num_1, sep = ''), ', PC', sep = ''), pc_num_2, sep = ' '), 'and PC', sep = ' '), pc_num_3, sep = ''), '3D PC Scores Plot (', sep = ' '), variable, sep = ''), ')', sep = ''),
             scene = list(bgcolor = "#FFFFFF",

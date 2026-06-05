@@ -35,7 +35,7 @@ load_dsc <- function(inpath, upper, lower, fstruc, delim, stepsize){
                      mean)
     Bins <- Bins[, -1]
 
-    Bins_round <- Bins %>% mutate_at(vars(Temperature), funs(round(., 2)))
+    Bins_round <- Bins |> mutate_at(vars(Temperature), funs(round(., 2)))
 
     data_processed <- Bins_round[1:num_temp, ]
 
@@ -70,7 +70,7 @@ load_dsc <- function(inpath, upper, lower, fstruc, delim, stepsize){
   variables <- as.data.frame(strsplit(fstruc, delim))
   num_var <- nrow(variables)
   var_db <- as.data.frame(t(variables))
-  var_db <- var_db %>%
+  var_db <- var_db |>
     janitor::row_to_names(row_number = 1)
 
   # Adding varaible information from file names to variable dataframe and combining

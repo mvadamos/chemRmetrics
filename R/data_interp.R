@@ -6,7 +6,6 @@
 #' data has been interpolated, the first row holding the variables is
 #' converted to column names.
 #'
-#' @import dplyr
 #' @param df Dataframe to be interpolated
 #' @param non_num Number of non-numeric variables in the first n columns of
 #' the dataset
@@ -35,7 +34,7 @@ data_interp <- function(df, non_num, upper, lower, step){
   # Recreating original dataframe with interpolated x-axis values
   Raw_Spectra <- as.data.frame(t(Bins))
   Raw_Spectra <- cbind(Variables, Raw_Spectra)
-  Raw_Spectra <- Raw_Spectra %>%
+  Raw_Spectra <- Raw_Spectra |>
     janitor::row_to_names(row_number = 1)
   Raw_Spectra
 }
