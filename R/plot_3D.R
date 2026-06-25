@@ -97,7 +97,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
       fig_3D <- plotly::plot_ly(df,
                                 colors = rainbow(n_distinct(df[[variable]])),
                                 type = 'scatter3d',
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
@@ -122,7 +122,7 @@ plot_3D <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12, colo
       fig_3D <- plotly::plot_ly(df,
                                 colors = colours,
                                 type = 'scatter3d',
-                                mode = 'markers') %>%
+                                mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],
                             y = df[[paste('PC', pc_num_2, sep = '')]],
                             z = df[[paste('PC', pc_num_3, sep = '')]],
