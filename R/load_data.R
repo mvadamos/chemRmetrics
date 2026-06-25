@@ -45,7 +45,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     file_list <- as.data.frame(list.files(path = inpath))
     file_list_path <- as.data.frame(list.files(path = inpath, full.names = TRUE))
     # Reading in first file and creating dataframe
-    first_entry <- readJDX::readJDX(file = file_list_path[1, 1])
+    first_entry <- readJDX::readJDX(file = file_list_path[1, 1], SOFC = SOFC)
     raw_spectra <- as.data.frame(t(first_entry[[4]]))
     raw_spectra <- raw_spectra[1, ]
     raw_spectra <- raw_spectra |>
@@ -53,7 +53,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
 
     # Adding data from all remaining files to dataframe
     for (i in 1:nrow(file_list_path)) {
-      JDX_data <- readJDX::readJDX(file = file_list_path[i, 1])
+      JDX_data <- readJDX::readJDX(file = file_list_path[i, 1], SOFC = SOFC)
       spec_data <- as.data.frame(t(JDX_data[[4]]))
 
       if (ncol(spec_data) != ncol(raw_spectra)){
