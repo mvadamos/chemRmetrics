@@ -21,9 +21,11 @@
 #' (e.g. the column that contains the wavenumbers for infrared spectral data)
 #' @param xvar The column that contains the x-varaible in the text or csv file
 #' (e.g. the column that contains the absorbance/transmittance for infrared spectral data)
+#' @param SOFC 'Stop on Failed Check' for 'readJDX' package (Please refer to 'read_JDX'
+#' package reference manual before changeing this value)
 #' @return A dataframe of the input data
 #' @export
-load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xvar){
+load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xvar, SOFC = TRUE){
   # Checks for 'xlsx' file type
   if (grepl('xlsx', ftype, ignore.case = T)){
     # Load in data from 'xlsx' file
