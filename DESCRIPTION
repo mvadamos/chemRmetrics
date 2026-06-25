@@ -20,4 +20,5 @@ Imports:
   gtools,
   gifski, 
   MALDIquantForeign,
-  MALDIquant
+  MALDIquant,
+  dplyr

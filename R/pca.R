@@ -29,7 +29,7 @@ pca <- function(df, non_num, num_pcs){
   cumulative_prop <- as.data.frame(myPr_sum$importance)
   cumulative_prop <- cumulative_prop[3, 1:num_pcs]
   cumulative_prop$PC0 <- c(0)
-  cumulative_prop <- cumulative_prop |> relocate(PC0)
+  cumulative_prop <- cumulative_prop |> dplyr::relocate(PC0)
   cumulative_prop <- t(cumulative_prop)
 
   # Creating scree plot and exporting it as a PDF
