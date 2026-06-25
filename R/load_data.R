@@ -53,6 +53,15 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     for (i in 1:nrow(file_list_path)) {
       JDX_data <- readJDX::readJDX(file = file_list_path[i, 1])
       spec_data <- as.data.frame(t(JDX_data[[4]]))
+
+      if (ncol(spec_data) != ncol(raw_spectra)){
+        if (ncol(spec_data) > ncol(raw_spectra)){
+          spec_data <- spec_data[, -c((ncol(raw_spectra) + 1):ncol(spec_data))]
+        } else{
+          raw_spectra <- raw_spectra[, -c((ncol(spec_data) + 1):ncol(raw_spectra))]
+        }
+      }
+
       colnames(spec_data) <- colnames(raw_spectra)
       spec_data <- spec_data [2, ]
       raw_spectra <- rbind(raw_spectra, spec_data)
