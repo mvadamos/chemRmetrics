@@ -40,7 +40,7 @@
 #' @return All data for each kendrick mass defect plot in '.csv' format
 #' @return All data for each kendrick mass remainder plot in '.csv' format
 #' @export
-Kendrick_pca <- function(df, num_pcs, unit_mass, unit_name, SNR, scale, trunc = 'FALSE', method = 'MAD', halfWindowSize = '10', peak_pick = 'auto'){
+Kendrick_pca <- function(df, num_pcs, unit_mass, unit_name, SNR, scale, trunc = 'FALSE', max_mass, method = 'MAD', halfWindowSize = '10', peak_pick = 'auto'){
   # Determine Number of Non-Numeric Columns as the Start of a Data Frame
   suppressWarnings(
     for (i in 1:ncol(df)){
@@ -49,6 +49,17 @@ Kendrick_pca <- function(df, num_pcs, unit_mass, unit_name, SNR, scale, trunc = 
         break
       }
     })
+
+  # Truncating Data
+  if (trunc == TRUE){
+    step <- as.numeric(colnames(df)[non_num + 2]) - as.numeric(colnames(df)[non_num + 1])
+
+    gap <- max_mass - as.numeric(colnames(df)[non_num + 1])
+
+    num_steps = round(gap/step)
+
+    df <- df[, -c(num_steps:ncol(df))]
+  }
 
   # Performing PCA using prcomp() function in base R
   myPr <- prcomp(df[, -c(1:non_num)], rank. = num_pcs)

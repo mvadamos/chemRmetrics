@@ -12,6 +12,7 @@ Kendrick_pca(
   SNR,
   scale,
   trunc = "FALSE",
+  max_mass,
   method = "MAD",
   halfWindowSize = "10",
   peak_pick = "auto"
@@ -37,6 +38,9 @@ affect the SNR value when peak_pick = 'manual')}
 \item{trunc}{Used to designate if the user would like to reduce the mass range of
 the spectra (Default = FALSE)}
 
+\item{max_mass}{The maximum mass desired for the mass spectra which will be used to
+truncate the mass range if 'trunc' = TRUE}
+
 \item{method}{The peak picking method used for the 'detectPeaks()' function in the
 MALDIquant package (see MALDIquant package guide for further details)}
 
@@ -47,9 +51,6 @@ package guide for further details)}
 is performed using the 'detectPeaks()' function within the MALDIquant package. Use 'manual'
 if m/z value are nominal, all masses with a normalised intensity values greater than 'SNR'
 will be included as a peak}
-
-\item{max_mass}{The maximum mass desired for the mass spectra which will be used to
-truncate the mass range if 'trunc' = TRUE}
 }
 \value{
 An Excel spreadsheet with loadings data
