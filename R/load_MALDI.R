@@ -24,6 +24,9 @@ load_MALDI <- function(inpath, ref, nmass){
   # Perform Baseline Correction
   raw_data_blc <- MALDIquant::removeBaseline(raw_data, method = 'SNIP')
 
+  # Perform TIC Normalisation
+  raw_data_blc <- MALDIquant::calibrateIntensity(raw_data_blc, method = 'TIC')
+
   # Extract Mass and Intensity Data
   mass_list <- as.data.frame(t(MALDIquant::mass(raw_data_blc[[1]]))) |>
     janitor::row_to_names(1)
