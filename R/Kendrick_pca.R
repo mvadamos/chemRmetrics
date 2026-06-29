@@ -30,6 +30,8 @@
 #' will be included as a peak
 #' @param ymin Minimum y-value for KMD and KMR PDF plots
 #' @param ymax Maximum y-value for KMD and KMR PDF plots
+#' @param xmin Minimum x-value for KMD and KMR PDF plots
+#' @param xmax Maximum x-value for KMD and KMR PDF plots
 #' @return An Excel spreadsheet with loadings data
 #' @return An Excel spreadsheet with scree data
 #' @return A PDF file with the scree plot
@@ -42,7 +44,7 @@
 #' @return All data for each kendrick mass defect plot in '.csv' format
 #' @return All data for each kendrick mass remainder plot in '.csv' format
 #' @export
-Kendrick_pca <- function(df, num_pcs, unit_mass, unit_name, SNR, scale, trunc = 'FALSE', max_mass, method = 'MAD', halfWindowSize = '10', peak_pick = 'auto', ymin, ymax){
+Kendrick_pca <- function(df, num_pcs, unit_mass, unit_name, SNR, scale, trunc = 'FALSE', max_mass, method = 'MAD', halfWindowSize = '10', peak_pick = 'auto', ymin, ymax, xmin, xmax){
   # Determine Number of Non-Numeric Columns as the Start of a Data Frame
   suppressWarnings(
     for (i in 1:ncol(df)){
@@ -126,7 +128,7 @@ Kendrick_pca <- function(df, num_pcs, unit_mass, unit_name, SNR, scale, trunc = 
 
   # Creating a Kendrick plot for each loadings plot up to the number of PCs specified with the num_pcs argumnet
   # then exporting the plots as PDFs
-  chemRmetrics::plot_Kendrick(loadings, unit_mass, unit_name, SNR, scale, trunc, max_mass, method, halfWindowSize, peak_pick, ymin, ymax)
+  chemRmetrics::plot_Kendrick(loadings, unit_mass, unit_name, SNR, scale, trunc, max_mass, method, halfWindowSize, peak_pick, ymin, ymax, xmin, xmax)
 
   # Exporting the loadings data as an Excel file to edit with other software
   writexl::write_xlsx(loadings, 'Loadings_Data.xlsx')

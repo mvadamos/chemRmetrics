@@ -16,7 +16,9 @@ plot_Kendrick(
   halfWindowSize = 10,
   peak_pick = "auto",
   ymin,
-  ymax
+  ymax,
+  xmin,
+  xmax
 )
 }
 \arguments{
@@ -53,6 +55,10 @@ will be included as a peak}
 \item{ymin}{Minimum y-value for KMD and KMR PDF plots}
 
 \item{ymax}{Maximum y-value for KMD and KMR PDF plots}
+
+\item{xmin}{Minimum x-value for KMD and KMR PDF plots}
+
+\item{xmax}{Maximum x-value for KMD and KMR PDF plots}
 }
 \value{
 A folder labelled 'KMD Plots' in which all Kendrick mass defect plots will be output

@@ -30,6 +30,8 @@
 #' will be included as a peak
 #' @param ymin Minimum y-value for KMD and KMR PDF plots
 #' @param ymax Maximum y-value for KMD and KMR PDF plots
+#' @param xmin Minimum x-value for KMD and KMR PDF plots
+#' @param xmax Maximum x-value for KMD and KMR PDF plots
 #' @return A folder labelled 'KMD Plots' in which all Kendrick mass defect plots will be output
 #' @return A folder labelled 'KMR Plots' in which all Kendrick mass remainder plots will be output
 #' @return A kendrick mass defect plot as a '.pdf' file for each mass spectrum in 'df'
@@ -39,7 +41,7 @@
 #' @return All data for each kendrick mass defect plot in '.csv' format
 #' @return All data for each kendrick mass remainder plot in '.csv' format
 #' @export
-plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, max_mass, method = 'MAD', halfWindowSize = 10, peak_pick = 'auto', ymin, ymax){
+plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, max_mass, method = 'MAD', halfWindowSize = 10, peak_pick = 'auto', ymin, ymax, xmin, xmax){
   # Determine Number of Non-Numeric Columns as the Start of a Data Frame
   suppressWarnings(
     for (i in 1:ncol(df)){
@@ -115,12 +117,12 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
     # Kendrick Plots
     dir.create('KMD Plots')
     pdf(paste('KMD Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), 'KMD Plot.pdf', sep = ' '), sep = '_'), sep = ''))
-    plot(peaks_KMD[, 1], peaks_KMD[, 2], pch = 19, cex = peaks_intensity[, 2], xaxs = 'i', yaxs = 'i', main = paste('Repeating Unit:', unit_name, sep = ' '), xlab = 'Nominal Kendrick Mass', ylab = 'Kendrick Mass Defect', ylim = c(ymin, ymax))
+    plot(peaks_KMD[, 1], peaks_KMD[, 2], pch = 19, cex = peaks_intensity[, 2], xaxs = 'i', yaxs = 'i', main = paste('Repeating Unit:', unit_name, sep = ' '), xlab = 'Nominal Kendrick Mass', ylab = 'Kendrick Mass Defect', xlim = c(xmin, xmax), ylim = c(ymin, ymax))
     dev.off()
 
     dir.create('KMR Plots')
     pdf(paste('KMR Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), 'KMR Plot.pdf', sep = ' '), sep = '_'), sep = ''))
-    plot(peaks_mass[, 1], peaks_KMR[, 1], pch = 19, cex = peaks_intensity[, 2], xaxs = 'i', yaxs = 'i', main = paste('Repeating Unit:', unit_name, sep = ' '), xlab = 'm/z', ylab = 'Kendrick Mass Remainder', ylim = c(ymin, ymax))
+    plot(peaks_mass[, 1], peaks_KMR[, 1], pch = 19, cex = peaks_intensity[, 2], xaxs = 'i', yaxs = 'i', main = paste('Repeating Unit:', unit_name, sep = ' '), xlab = 'm/z', ylab = 'Kendrick Mass Remainder', xlim = c(xmin, xmax), ylim = c(ymin, ymax))
     dev.off()
 
     fig_2D_KMD <- plotly::plot_ly(df,
