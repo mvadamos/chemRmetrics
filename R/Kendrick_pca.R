@@ -42,7 +42,7 @@
 #' @return All data for each kendrick mass defect plot in '.csv' format
 #' @return All data for each kendrick mass remainder plot in '.csv' format
 #' @export
-Kendrick_pca <- function(df, num_pcs, unit_mass, unit_name, SNR, scale, trunc = 'FALSE', max_mass, method = 'MAD', halfWindowSize = '10', peak_pick = 'auto', yim, ymax){
+Kendrick_pca <- function(df, num_pcs, unit_mass, unit_name, SNR, scale, trunc = 'FALSE', max_mass, method = 'MAD', halfWindowSize = '10', peak_pick = 'auto', ymin, ymax){
   # Determine Number of Non-Numeric Columns as the Start of a Data Frame
   suppressWarnings(
     for (i in 1:ncol(df)){

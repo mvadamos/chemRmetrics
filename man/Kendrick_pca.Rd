@@ -16,7 +16,7 @@ Kendrick_pca(
   method = "MAD",
   halfWindowSize = "10",
   peak_pick = "auto",
-  yim,
+  ymin,
   ymax
 )
 }
@@ -54,9 +54,9 @@ is performed using the 'detectPeaks()' function within the MALDIquant package. U
 if m/z value are nominal, all masses with a normalised intensity values greater than 'SNR'
 will be included as a peak}
 
-\item{ymax}{Maximum y-value for KMD and KMR PDF plots}
-
 \item{ymin}{Minimum y-value for KMD and KMR PDF plots}
+
+\item{ymax}{Maximum y-value for KMD and KMR PDF plots}
 }
 \value{
 An Excel spreadsheet with loadings data
