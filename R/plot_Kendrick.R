@@ -110,8 +110,8 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
       peaks_KMD[y, 2] <- peaks_KM[y, 1] - round(peaks_KM[y, 1])
     }
 
-    for (r in 1:nrow(peaks_mass)){
-      peaks_KMR[r, 1] <- peaks_mass[r, 1] %% unit_mass
+    for (r in 1:nrow(peaks_KMD)){
+      peaks_KMR[r, 1] <- peaks_KMD[r, 1] %% round(unit_mass)
     }
 
     # Kendrick Plots
