@@ -14,7 +14,9 @@ plot_Kendrick(
   max_mass,
   method = "MAD",
   halfWindowSize = 10,
-  peak_pick = "auto"
+  peak_pick = "auto",
+  ymin,
+  ymax
 )
 }
 \arguments{
@@ -47,6 +49,10 @@ package guide for further details)}
 is performed using the 'detectPeaks()' function within the MALDIquant package. Use 'manual'
 if m/z value are nominal, all masses with a normalised intensity values greater than 'SNR'
 will be included as a peak}
+
+\item{ymin}{Minimum y-value for KMD and KMR PDF plots}
+
+\item{ymax}{Maximum y-value for KMD and KMR PDF plots}
 }
 \value{
 A folder labelled 'KMD Plots' in which all Kendrick mass defect plots will be output
