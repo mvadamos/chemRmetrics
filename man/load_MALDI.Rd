@@ -4,7 +4,7 @@
 \alias{load_MALDI}
 \title{Load MALDI-MS Data using the MALDIquantForeign and MALDIquant Packages}
 \usage{
-load_MALDI(inpath, ref, nmass)
+load_MALDI(inpath, ref, nmass, trunc = FALSE, lower, upper)
 }
 \arguments{
 \item{inpath}{Path to the MzMl file holding the MALDI-MS data}
@@ -14,6 +14,12 @@ for each sample (all information stored in a row for each sample)}
 
 \item{nmass}{The number of m/z chanels that the mass spectrum should contain (used to
 filter spectra of interest)}
+
+\item{trunc}{Used to designate if the user would like to truncate the dataset (default = 'FALSE')}
+
+\item{lower}{Minimum mass for spectra}
+
+\item{upper}{Maximum mass for spectra}
 }
 \value{
 Dataframe containing mass spectra and variable information for each sample

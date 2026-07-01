@@ -15,14 +15,22 @@
 #' for each sample (all information stored in a row for each sample)
 #' @param nmass The number of m/z chanels that the mass spectrum should contain (used to
 #' filter spectra of interest)
+#' @param trunc Used to designate if the user would like to truncate the dataset (default = 'FALSE')
+#' @param lower Minimum mass for spectra
+#' @param upper Maximum mass for spectra
 #' @return Dataframe containing mass spectra and variable information for each sample
 #' @export
-load_MALDI <- function(inpath, ref, nmass){
+load_MALDI <- function(inpath, ref, nmass, trunc = FALSE, lower, upper){
   # Load MzMl File
   raw_data <- MALDIquantForeign::importMzMl(inpath)
 
+  # Truncate Spectra
+  if (trunc == TRUE){
+    raw_data_blc <- MALDIquant::trim(raw_data, lower, upper)
+  }
+
   # Perform Baseline Correction
-  raw_data_blc <- MALDIquant::removeBaseline(raw_data, method = 'SNIP')
+  raw_data_blc <- MALDIquant::removeBaseline(raw_data_blc, method = 'SNIP')
 
   # Perform TIC Normalisation
   raw_data_blc <- MALDIquant::calibrateIntensity(raw_data_blc, method = 'TIC')
