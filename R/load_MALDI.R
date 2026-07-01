@@ -33,7 +33,7 @@ load_MALDI <- function(inpath, ref, nmass, trunc = FALSE, lower, upper){
   raw_data_blc <- MALDIquant::removeBaseline(raw_data_blc, method = 'SNIP')
 
   # Perform TIC Normalisation
-  raw_data_blc <- MALDIquant::calibrateIntensity(raw_data_blc, method = 'TIC')
+  # raw_data_blc <- MALDIquant::calibrateIntensity(raw_data_blc, method = 'TIC')
 
   # Extract Mass and Intensity Data
   mass_list <- as.data.frame(t(MALDIquant::mass(raw_data_blc[[1]]))) |>
