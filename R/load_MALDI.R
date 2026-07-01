@@ -26,7 +26,7 @@ load_MALDI <- function(inpath, ref, nmass, trunc = FALSE, lower, upper){
 
   # Truncate Spectra
   if (trunc == TRUE){
-    raw_data_blc <- MALDIquant::trim(raw_data, lower, upper)
+    raw_data_blc <- MALDIquant::trim(raw_data, range = c(lower, upper))
   }
 
   # Perform Baseline Correction
