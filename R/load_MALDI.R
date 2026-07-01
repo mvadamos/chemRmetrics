@@ -13,14 +13,12 @@
 #' @param inpath Path to the MzMl file holding the MALDI-MS data
 #' @param ref Path to Microsoft Excel spreadsheet holding variable data and 'target ID'
 #' for each sample (all information stored in a row for each sample)
-#' @param nmass The number of m/z chanels that the mass spectrum should contain (used to
-#' filter spectra of interest)
 #' @param trunc Used to designate if the user would like to truncate the dataset (default = 'FALSE')
 #' @param lower Minimum mass for spectra
 #' @param upper Maximum mass for spectra
 #' @return Dataframe containing mass spectra and variable information for each sample
 #' @export
-load_MALDI <- function(inpath, ref, nmass, trunc = FALSE, lower, upper){
+load_MALDI <- function(inpath, ref, trunc = FALSE, lower, upper){
   # Load MzMl File
   raw_data <- MALDIquantForeign::importMzMl(inpath)
 
@@ -45,7 +43,7 @@ load_MALDI <- function(inpath, ref, nmass, trunc = FALSE, lower, upper){
 
   for (i in 1:length(raw_data_blc)){
     temp <- as.data.frame(t(MALDIquant::intensity(raw_data_blc[[i]])))
-    if (length(colnames(temp)) == nmass){ #nmass typically set to 573440
+    if (length(colnames(temp)) == ncol(mass_list)){ #nmass typically set to 573440
       colnames(temp) <- colnames(mass_list)
       mass_list <- rbind(mass_list, temp)
       sample_num_list[x, 1] <- i

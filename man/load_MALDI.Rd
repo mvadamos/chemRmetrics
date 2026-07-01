@@ -4,16 +4,13 @@
 \alias{load_MALDI}
 \title{Load MALDI-MS Data using the MALDIquantForeign and MALDIquant Packages}
 \usage{
-load_MALDI(inpath, ref, nmass, trunc = FALSE, lower, upper)
+load_MALDI(inpath, ref, trunc = FALSE, lower, upper)
 }
 \arguments{
 \item{inpath}{Path to the MzMl file holding the MALDI-MS data}
 
 \item{ref}{Path to Microsoft Excel spreadsheet holding variable data and 'target ID'
 for each sample (all information stored in a row for each sample)}
-
-\item{nmass}{The number of m/z chanels that the mass spectrum should contain (used to
-filter spectra of interest)}
 
 \item{trunc}{Used to designate if the user would like to truncate the dataset (default = 'FALSE')}
 
