@@ -116,12 +116,12 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
 
     # Kendrick Plots
     dir.create('KMD Plots')
-    pdf(paste('KMD Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), paste(paste('KMD Plot', rownames(df)[i], sep = ''), '.pdf', sep = ''), sep = ' '), sep = '_'), sep = ''))
+    pdf(paste('KMD Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), paste(paste('KMD Plot_', rownames(df)[i], sep = ''), '.pdf', sep = ''), sep = ' '), sep = '_'), sep = ''))
     plot(peaks_KMD[, 1], peaks_KMD[, 2], pch = 19, cex = peaks_intensity[, 2], xaxs = 'i', yaxs = 'i', main = paste('Repeating Unit:', unit_name, sep = ' '), xlab = 'Nominal Kendrick Mass', ylab = 'Kendrick Mass Defect', xlim = c(xmin, xmax), ylim = c(ymin, ymax))
     dev.off()
 
     dir.create('KMR Plots')
-    pdf(paste('KMR Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), paste(paste('KMR Plot', rownames(df)[i], sep = ''), '.pdf', sep = ''), sep = ' '), sep = '_'), sep = ''))
+    pdf(paste('KMR Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), paste(paste('KMR Plot_', rownames(df)[i], sep = ''), '.pdf', sep = ''), sep = ' '), sep = '_'), sep = ''))
     plot(peaks_mass[, 1], peaks_KMR[, 1], pch = 19, cex = peaks_intensity[, 2], xaxs = 'i', yaxs = 'i', main = paste('Repeating Unit:', unit_name, sep = ' '), xlab = 'm/z', ylab = 'Kendrick Mass Remainder', xlim = c(xmin, xmax), ylim = c(ymin, ymax))
     dev.off()
 
@@ -141,7 +141,7 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
 
     fig_2D_KMD
 
-    htmlwidgets::saveWidget(fig_2D_KMD, file = paste('KMD Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), paste(paste('KMD Plot', rownames(df)[i], sep = ''), '.html', sep = ''), sep = ' '), sep = '_'), sep = ''))
+    htmlwidgets::saveWidget(fig_2D_KMD, file = paste('KMD Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), paste(paste('KMD Plot_', rownames(df)[i], sep = ''), '.html', sep = ''), sep = ' '), sep = '_'), sep = ''))
 
     fig_2D_KMR <- plotly::plot_ly(df,
                                   type = 'scatter',
@@ -159,7 +159,7 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
 
     fig_2D_KMR
 
-    htmlwidgets::saveWidget(fig_2D_KMR, file = paste('KMR Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), paste(paste('KMR Plot', rownames(df)[i], sep = ''), '.html', sep = ''), sep = ' '), sep = '_'), sep = ''))
+    htmlwidgets::saveWidget(fig_2D_KMR, file = paste('KMR Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), paste(paste('KMR Plot_', rownames(df)[i], sep = ''), '.html', sep = ''), sep = ' '), sep = '_'), sep = ''))
 
     # Export KMR Data '.csv'
     KMR_data <- cbind(peaks_mass[, 1], peaks_KMR)
