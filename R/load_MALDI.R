@@ -72,5 +72,15 @@ load_MALDI <- function(inpath, ref, trunc = FALSE, lower, upper){
 
   mass_list <- cbind(first_cols, mass_list)
 
+  # Adding Row Names to First Column of mass_list
+  rnames <- as.data.frame(matrix(ncol = 1, nrow = nrow(mass_list)))
+
+  for (i in 1:nrow(mass_list)){
+    rnames[i, 1] <- rownames(mass_list)[i]
+  }
+
+  mass_list <- rbind(rnames, mass_list)
+
+  # Returning mass_list
   mass_list
 }
