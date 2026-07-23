@@ -81,6 +81,8 @@ load_MALDI <- function(inpath, ref, trunc = FALSE, lower, upper){
 
   mass_list <- rbind(rnames, mass_list)
 
+  colnames(mass_list)[1] <- 'Row Name'
+
   # Returning mass_list
   mass_list
 }
