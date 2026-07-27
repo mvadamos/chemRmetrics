@@ -111,7 +111,7 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
     }
 
     for (r in 1:nrow(peaks_KMD)){
-      peaks_KMR[r, 1] <- round(peaks_KMD[r, 1]) %% round(unit_mass)
+      peaks_KMR[r, 1] <- peaks_KMD[r, 1] %% round(unit_mass)
     }
 
     # Kendrick Plots
@@ -122,7 +122,7 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
 
     dir.create('KMR Plots')
     pdf(paste('KMR Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), paste(paste('KMR Plot_', rownames(df)[i], sep = ''), '.pdf', sep = ''), sep = ' '), sep = '_'), sep = ''))
-    plot(peaks_mass[, 1], peaks_KMR[, 1], pch = 19, cex = peaks_intensity[, 2], xaxs = 'i', yaxs = 'i', main = paste('Repeating Unit:', unit_name, sep = ' '), xlab = 'm/z', ylab = 'Kendrick Mass Remainder', xlim = c(xmin, xmax), ylim = c(ymin, ymax))
+    plot(peaks_KMD[r, 1], peaks_KMR[, 1], pch = 19, cex = peaks_intensity[, 2], xaxs = 'i', yaxs = 'i', main = paste('Repeating Unit:', unit_name, sep = ' '), xlab = 'm/z', ylab = 'Kendrick Mass Remainder', xlim = c(xmin, xmax), ylim = c(ymin, ymax))
     dev.off()
 
     fig_2D_KMD <- plotly::plot_ly(df,
@@ -146,7 +146,7 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
     fig_2D_KMR <- plotly::plot_ly(df,
                                   type = 'scatter',
                                   mode = 'markers') |>
-      plotly::add_markers(x = peaks_mass[, 1],
+      plotly::add_markers(x = peaks_KMD[r, 1],
                           y = peaks_KMR[, 1],
                           marker = list(size = peaks_intensity[, 2]*5))
 
@@ -162,7 +162,7 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
     htmlwidgets::saveWidget(fig_2D_KMR, file = paste('KMR Plots/', paste(unit_name, paste(paste('Sample #', df$`Sample ID`[i], sep = ''), paste(paste('KMR Plot_', rownames(df)[i], sep = ''), '.html', sep = ''), sep = ' '), sep = '_'), sep = ''))
 
     # Export KMR Data '.csv'
-    KMR_data <- cbind(peaks_mass[, 1], peaks_KMR)
+    KMR_data <- cbind(peaks_KMD[r, 1], peaks_KMR)
     KMR_data <- cbind(KMR_data, peaks_intensity[, 2]/2)
 
     write.csv(KMR_data, paste(paste(paste('KMR Plots/KMR Data Sample #_', df$`Sample ID`[i], sep = ''), rownames(df)[i], sep = ''),  '.csv', sep = ''))
