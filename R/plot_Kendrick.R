@@ -106,12 +106,12 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
     }
 
     for (y in 1:nrow(peaks_KM)){
-      peaks_KMD[y, 1] <- floor(peaks_KM[y, 1])
+      peaks_KMD[y, 1] <- round(peaks_KM[y, 1])
       peaks_KMD[y, 2] <- peaks_KM[y, 1] - round(peaks_KM[y, 1])
     }
 
     for (r in 1:nrow(peaks_KMD)){
-      peaks_KMR[r, 1] <- peaks_KMD[r, 1] %% round(unit_mass)
+      peaks_KMR[r, 1] <- peaks_KM[r, 1] %% round(unit_mass)
     }
 
     # Kendrick Plots
@@ -154,7 +154,7 @@ plot_Kendrick <- function(df, unit_mass, unit_name, SNR, scale, trunc = FALSE, m
       plotly::layout(
         title = paste('Repeating Unit:', unit_name, sep = ' '),
         scene = list(bgcolor = "#FFFFFF"),
-        xaxis = list(zeroline = F,showline = T, showgrid = FALSE, ticks = 'outside', title = 'Nominal Kendrick Mass'),
+        xaxis = list(zeroline = F,showline = T, showgrid = FALSE, ticks = 'outside', title = 'm/z'),
         yaxis = list(zeroline = F, showline = T, showgrid = FALSE, ticks = 'outside', title = 'Kendrick Mass Remainder'))
 
     fig_2D_KMR
