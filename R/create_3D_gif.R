@@ -32,7 +32,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
       # Creating 3D scatter plot using PC scores data
       fig_3D <- plotly::plot_ly(df,
                                 # Providing a rainbow colour palette as default
-                                colors = rainbow(n_distinct(df[[variable]])),
+                                colors = rainbow(dplyr::n_distinct(df[[variable]])),
                                 # Selecting symbols for original and projected data
                                 symbols = c('Original' = 'circle', 'Projected' = 'diamond'),
                                 # Setting plot type as a scatter plot
@@ -131,7 +131,7 @@ create_3D_gif <- function(df, variable, pc_num_1, pc_num_2, pc_num_3, msize = 12
     # Same code as for (proj = TRUE), with no 'symbol' or 'symbols' arguments
     if (is.null(colours)){
       fig_3D <- plotly::plot_ly(df,
-                                colors = rainbow(n_distinct(df[[variable]])),
+                                colors = rainbow(dplyr::n_distinct(df[[variable]])),
                                 type = 'scatter3d',
                                 mode = 'markers') |>
         plotly::add_markers(x = df[[paste('PC', pc_num_1, sep = '')]],

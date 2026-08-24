@@ -35,7 +35,7 @@ load_dsc <- function(inpath, upper, lower, fstruc, delim, stepsize){
                      mean)
     Bins <- Bins[, -1]
 
-    Bins_round <- Bins |> mutate_at(vars(Temperature), funs(round(., 2)))
+    Bins_round <- Bins |> dplyr::mutate_at(vars(Temperature), funs(round(., 2)))
 
     data_processed <- Bins_round[1:num_temp, ]
 
