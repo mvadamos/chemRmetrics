@@ -13,7 +13,8 @@ load_data(
   skip = 0,
   yvar,
   xvar,
-  SOFC = TRUE
+  SOFC = TRUE,
+  shift_correct = FALSE
 )
 }
 \arguments{
@@ -41,6 +42,9 @@ reading in the data (default = 0)}
 
 \item{SOFC}{'Stop on Failed Check' for 'readJDX' package (Please refer to 'read_JDX'
 package reference manual before changeing this value)}
+
+\item{shift_correct}{Corrects for instrument drift. Currently only corrects using PLA
+spectra by setting argument to 'PLA'}
 }
 \value{
 A dataframe of the input data

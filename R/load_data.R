@@ -23,9 +23,11 @@
 #' (e.g. the column that contains the absorbance/transmittance for infrared spectral data)
 #' @param SOFC 'Stop on Failed Check' for 'readJDX' package (Please refer to 'read_JDX'
 #' package reference manual before changeing this value)
+#' @param shift_correct Corrects for instrument drift. Currently only corrects using PLA
+#' spectra by setting argument to 'PLA'
 #' @return A dataframe of the input data
 #' @export
-load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xvar, SOFC = TRUE){
+load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xvar, SOFC = TRUE, shift_correct = FALSE){
   # Checks for 'xlsx' file type
   if (grepl('xlsx', ftype, ignore.case = T)){
     # Load in data from 'xlsx' file
@@ -47,6 +49,15 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     # Reading in first file and creating dataframe
     first_entry <- readJDX::readJDX(file = file_list_path[1, 1], SOFC = SOFC)
     raw_spectra <- as.data.frame(t(first_entry[[4]]))
+
+    if (shift_correct == 'PLA'){
+      lower <- which.min(abs(raw_spectra[1, ] - 2925.6))
+      upper <- which.min(abs(raw_spectra[1, ] - 2965.6))
+      max <- raw_spectra[1, which.max(raw_spectra[2, lower:upper]) + lower]
+      shift <- 2945.6 - max
+      raw_spectra[1, ] <- raw_spectra[1, ] + shift
+    }
+
     raw_spectra <- raw_spectra[1, ]
     raw_spectra <- raw_spectra |>
       janitor::row_to_names(row_number = 1)
@@ -55,6 +66,14 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     for (i in 1:nrow(file_list_path)) {
       JDX_data <- readJDX::readJDX(file = file_list_path[i, 1], SOFC = SOFC)
       spec_data <- as.data.frame(t(JDX_data[[4]]))
+
+      if (shift_correct == 'PLA'){
+        lower <- which.min(abs(spec_data[1, ] - 2925.6))
+        upper <- which.min(abs(spec_data[1, ] - 2965.6))
+        max <- spec_data[1, which.max(spec_data[2, lower:upper]) + lower]
+        shift <- 2945.6 - max
+        spec_data[1, ] <- spec_data[1, ] + shift
+      }
 
       if (ncol(spec_data) != ncol(raw_spectra)){
         if (ncol(spec_data) > ncol(raw_spectra)){
