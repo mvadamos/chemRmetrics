@@ -28,161 +28,92 @@
 #' @return A dataframe of the input data
 #' @export
 load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xvar, SOFC = TRUE, shift_correct = FALSE){
-  # Checks for 'xlsx' file type
-  if (grepl('xlsx', ftype, ignore.case = T)){
-    # Load in data from 'xlsx' file
-    Raw_Spectra <- readxl::read_excel(inpath)
-    first_num <- non_num + 1
-    # Ensures all numeric values are numeric
-    for (i in first_num:ncol(Raw_Spectra)){
-      Raw_Spectra[i] <- as.numeric(unlist((Raw_Spectra[i])))
-    }
-    Raw_Spectra
-    # Checks for 'jdx' file type
-  } else if(grepl('jdx', ftype, ignore.case = T)){
-    # Extracting variables from file name structure
-    variables <- as.data.frame(strsplit(fstruc, delim))
-    num_var <- nrow(variables)
-    # Determining list of files from specified folder using 'inpath' argument
-    file_list <- as.data.frame(list.files(path = inpath))
-    file_list_path <- as.data.frame(list.files(path = inpath, full.names = TRUE))
-    # Reading in first file and creating dataframe
-    first_entry <- readJDX::readJDX(file = file_list_path[1, 1], SOFC = SOFC)
-    raw_spectra <- as.data.frame(t(first_entry[[4]]))
+  # Extracting variables from file name structure
+  variables <- as.data.frame(strsplit(fstruc, delim))
+  num_var <- nrow(variables)
+  # Determining list of files from specified folder using 'inpath' argument
+  file_list <- as.data.frame(list.files(path = inpath))
+  file_list_path <- as.data.frame(list.files(path = inpath, full.names = TRUE))
+  # Reading in first file and creating dataframe
+  first_entry <- readJDX::readJDX(file = file_list_path[1, 1], SOFC = SOFC)
+  raw_spectra <- as.data.frame(t(first_entry[[4]]))
+
+  # Corrects for instrument drift
+  if (shift_correct == 'PLA'){
+    lower <- which.min(abs(raw_spectra[1, ] - 2925.6))
+    upper <- which.min(abs(raw_spectra[1, ] - 2965.6))
+    max <- raw_spectra[1, which.max(raw_spectra[2, lower:upper]) + lower]
+    shift <- 2945.6 - max
+    raw_spectra[1, ] <- raw_spectra[1, ] + shift
+  }
+
+  raw_spectra <- raw_spectra[1, ]
+  raw_spectra <- raw_spectra |>
+    janitor::row_to_names(row_number = 1)
+
+  # Adding data from all remaining files to dataframe
+  for (i in 1:nrow(file_list_path)) {
+    JDX_data <- readJDX::readJDX(file = file_list_path[i, 1], SOFC = SOFC)
+    spec_data <- as.data.frame(t(JDX_data[[4]]))
 
     if (shift_correct == 'PLA'){
-      lower <- which.min(abs(raw_spectra[1, ] - 2925.6))
-      upper <- which.min(abs(raw_spectra[1, ] - 2965.6))
-      max <- raw_spectra[1, which.max(raw_spectra[2, lower:upper]) + lower]
+      lower <- which.min(abs(spec_data[1, ] - 2925.6))
+      upper <- which.min(abs(spec_data[1, ] - 2965.6))
+      max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower - 1)]
       shift <- 2945.6 - max
-      raw_spectra[1, ] <- raw_spectra[1, ] + shift
+      spec_data[1, ] <- spec_data[1, ] + shift
     }
 
-    raw_spectra <- raw_spectra[1, ]
-    raw_spectra <- raw_spectra |>
-      janitor::row_to_names(row_number = 1)
-
-    # Adding data from all remaining files to dataframe
-    for (i in 1:nrow(file_list_path)) {
-      JDX_data <- readJDX::readJDX(file = file_list_path[i, 1], SOFC = SOFC)
-      spec_data <- as.data.frame(t(JDX_data[[4]]))
-
-      if (ncol(spec_data) != ncol(raw_spectra)){
+    # Corrects for instrument drift
+    if (which(spec_data[1, ] == 2945.6) != which(as.data.frame(t(colnames(raw_spectra))) == 2945.6)){
+      if (which(spec_data[1, ] == 2945.6) > which(as.data.frame(t(colnames(raw_spectra))) == 2945.6)){
+        dif <- which(spec_data[1, ] == 2945.6) - which(as.data.frame(t(colnames(raw_spectra))) == 2945.6)
+        spec_data <- spec_data[, -c(1:dif)]
         if (ncol(spec_data) > ncol(raw_spectra)){
-          spec_data <- spec_data[, -c((ncol(raw_spectra) + 1):ncol(spec_data))]
-        } else{
-          raw_spectra <- raw_spectra[, -c((ncol(spec_data) + 1):ncol(raw_spectra))]
+          spec_data <- spec_data[, 1:ncol(raw_spectra)]
+        }
+        if (ncol(raw_spectra) > ncol(spec_data)){
+          raw_spectra <- raw_spectra[, 1:ncol(spec_data)]
         }
       }
-
-      if (shift_correct == 'PLA'){
-        lower <- which.min(abs(spec_data[1, ] - 2925.6))
-        upper <- which.min(abs(spec_data[1, ] - 2965.6))
-        max <- spec_data[1, which.max(spec_data[2, lower:upper]) + lower]
-        shift <- 2945.6 - max
-        spec_data[1, ] <- spec_data[1, ] + shift
+      if (which(spec_data[1, ] == 2945.6) < which(as.data.frame(t(colnames(raw_spectra))) == 2945.6)){
+        dif <- which(as.data.frame(t(colnames(raw_spectra))) == 2945.6) - which(spec_data[1, ] == 2945.6)
+        raw_spectra <- raw_spectra[, -c(1:dif)]
+        if (ncol(spec_data) > ncol(raw_spectra)){
+          spec_data <- spec_data[, 1:ncol(raw_spectra)]
+        }
+        if (ncol(raw_spectra) > ncol(spec_data)){
+          raw_spectra <- raw_spectra[, 1:ncol(spec_data)]
+        }
       }
-
-      colnames(spec_data) <- colnames(raw_spectra)
-      spec_data <- spec_data [2, ]
-      raw_spectra <- rbind(raw_spectra, spec_data)
     }
-    var_db <- as.data.frame(t(variables))
-    var_db <- var_db |>
-      janitor::row_to_names(row_number = 1)
 
-    # Adding varaible information from filename to dataframe
-    for (i in 1:nrow(file_list)) {
-      file_split <- strsplit(file_list[i, 1], delim)
-      file_var <- as.data.frame(t(file_split[[1]]))
-      colnames(file_var)[1:num_var] <- colnames(var_db)[1:num_var]
-      var_db <- rbind(var_db, file_var[ , 1:num_var])
+    if (ncol(spec_data) > ncol(raw_spectra)){
+      spec_data <- spec_data[, 1:ncol(raw_spectra)]
     }
-    var_db <- cbind(file_list, var_db)
-    raw_spectra <- cbind(var_db, raw_spectra)
-    colnames(raw_spectra)[1] <- 'Filename'
-    raw_spectra
-    # Checks for 'txt' file type
-  } else if(grepl('txt', ftype, ignore.case = T)){
-    # Extracting variables from file name structure
-    variables <- as.data.frame(strsplit(fstruc, delim))
-    num_var <- nrow(variables)
-    # Determining list of files from specified folder using 'inpath' argument
-    file_list <- as.data.frame(list.files(path = inpath))
-    file_list_path <- as.data.frame(list.files(path = inpath, full.names = TRUE))
-    # Reading in first file and creating dataframe
-    first_entry <- read.delim(file_list_path[1, 1], skip = skip)
-    raw_spectra <- as.data.frame(t(first_entry))
-    raw_spectra <- raw_spectra[yvar, ]
-    raw_spectra <- raw_spectra |>
-      janitor::row_to_names(row_number = 1)
 
-    # Adding data from all remaining files to dataframe
-    for (i in 1:nrow(file_list_path)) {
-      spec_data <- read.delim(file_list_path[i, 1], skip = skip)
-      spec_data <- as.data.frame(t(spec_data))
-      colnames(spec_data) <- colnames(raw_spectra)
-      spec_data <- spec_data [xvar, ]
-      raw_spectra <- rbind(raw_spectra, spec_data)
+    if (ncol(raw_spectra) > ncol(spec_data)){
+      raw_spectra <- raw_spectra[, 1:ncol(spec_data)]
     }
-    var_db <- as.data.frame(t(variables))
-    var_db <- var_db |>
-      janitor::row_to_names(row_number = 1)
 
-    # Adding varaible information from filename to dataframe
-    for (i in 1:nrow(file_list)) {
-      file_split <- strsplit(file_list[i, 1], delim)
-      file_var <- as.data.frame(t(file_split[[1]]))
-      colnames(file_var)[1:num_var] <- colnames(var_db)[1:num_var]
-      var_db <- rbind(var_db, file_var[ , 1:num_var])
-    }
-    var_db <- cbind(file_list, var_db)
-    raw_spectra <- cbind(var_db, raw_spectra)
-    colnames(raw_spectra)[1] <- 'Filename'
-    raw_spectra
-
-    # Checks for 'txt' file type
-  } else if(grepl('csv', ftype, ignore.case = T)){
-
-    # Extracting variables from file name structure
-    variables <- as.data.frame(strsplit(fstruc, delim))
-    num_var <- nrow(variables)
-    # Determining list of files from specified folder using 'inpath' argument
-    file_list <- as.data.frame(list.files(path = inpath))
-    file_list_path <- as.data.frame(list.files(path = inpath, full.names = TRUE))
-    # Reading in first file and creating dataframe
-    first_entry <- read.csv(file_list_path[1, 1], skip = skip)
-    raw_spectra <- as.data.frame(t(first_entry))
-    raw_spectra <- raw_spectra[yvar, ]
-    raw_spectra <- raw_spectra |>
-      janitor::row_to_names(row_number = 1)
-
-    # Adding data from all remaining files to dataframe
-    for (i in 1:nrow(file_list_path)) {
-      spec_data <- read.csv(file_list_path[i, 1], skip = skip)
-      spec_data <- as.data.frame(t(spec_data))
-      colnames(spec_data) <- colnames(raw_spectra)
-      spec_data <- spec_data[xvar, ]
-      raw_spectra <- rbind(raw_spectra, spec_data)
-    }
-    var_db <- as.data.frame(t(variables))
-    var_db <- var_db |>
-      janitor::row_to_names(row_number = 1)
-
-    # Adding varaible information from filename to dataframe
-    for (i in 1:nrow(file_list)) {
-      file_split <- strsplit(file_list[i, 1], delim)
-      file_var <- as.data.frame(t(file_split[[1]]))
-      colnames(file_var)[1:num_var] <- colnames(var_db)[1:num_var]
-      var_db <- rbind(var_db, file_var[ , 1:num_var])
-    }
-    var_db <- cbind(file_list, var_db)
-    raw_spectra <- cbind(var_db, raw_spectra)
-    colnames(raw_spectra)[1] <- 'Filename'
-    raw_spectra
-
-    # Provides warning for unsupported file types
-  } else{
-    print(paste(paste("Error: File type '", ftype, sep = ''), "' is not supported", sep = ''))
+    colnames(spec_data) <- colnames(raw_spectra)
+    spec_data <- spec_data [2, ]
+    raw_spectra <- rbind(raw_spectra, spec_data)
   }
+
+  # Adding varaible information from filename to dataframe
+  var_db <- as.data.frame(t(variables))
+  var_db <- var_db |>
+    janitor::row_to_names(row_number = 1)
+
+  for (i in 1:nrow(file_list)) {
+    file_split <- strsplit(file_list[i, 1], delim)
+    file_var <- as.data.frame(t(file_split[[1]]))
+    colnames(file_var)[1:num_var] <- colnames(var_db)[1:num_var]
+    var_db <- rbind(var_db, file_var[ , 1:num_var])
+  }
+  var_db <- cbind(file_list, var_db)
+  raw_spectra <- cbind(var_db, raw_spectra)
+  colnames(raw_spectra)[1] <- 'Filename'
+  raw_spectra
 }
