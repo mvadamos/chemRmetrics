@@ -55,7 +55,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     if (shift_correct == 'PLA'){
       lower <- which.min(abs(raw_spectra[1, ] - 2925.6))
       upper <- which.min(abs(raw_spectra[1, ] - 2965.6))
-      max <- raw_spectra[1, which.max(raw_spectra[2, (min(c(upper, lower)) - 1):(max(c(upper, lower)) - 1)]) + (min(c(upper, lower)) - 1)]
+      max <- raw_spectra[1, which.max(raw_spectra[2, (min(c(upper, lower)) - 1):(max(c(upper, lower)) - 1)]) + min(c(upper, lower))]
       shift <- 2945.6 - max
       raw_spectra[1, ] <- raw_spectra[1, ] + shift
     }
@@ -63,7 +63,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     if (shift_correct == 'PETG'){
       lower <- which.min(abs(raw_spectra[1, ] - 1595.1))
       upper <- which.min(abs(raw_spectra[1, ] - 1635.1))
-      max <- raw_spectra[1, which.max(raw_spectra[2, (min(c(upper, lower)) - 1):(max(c(upper, lower)) - 1)]) + (min(c(upper, lower)) - 1)]
+      max <- raw_spectra[1, which.max(raw_spectra[2, (min(c(upper, lower)) - 1):(max(c(upper, lower)) - 1)]) + min(c(upper, lower))]
       shift <- 1615.1 - max
       raw_spectra[1, ] <- raw_spectra[1, ] + shift
     }
@@ -71,7 +71,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     if (shift_correct == 'ABS'){
       lower <- which.min(abs(raw_spectra[1, ] - 985.3))
       upper <- which.min(abs(raw_spectra[1, ] - 1025.3))
-      max <- raw_spectra[1, which.max(raw_spectra[2, (min(c(upper, lower)) - 1):(max(c(upper, lower)) - 1)]) + (min(c(upper, lower)) - 1)]
+      max <- raw_spectra[1, which.max(raw_spectra[2, (min(c(upper, lower)) - 1):(max(c(upper, lower)) - 1)]) + min(c(upper, lower))]
       shift <- 1005.3 - max
       raw_spectra[1, ] <- raw_spectra[1, ] + shift
     }
