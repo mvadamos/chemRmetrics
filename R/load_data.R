@@ -93,7 +93,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
           max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower- 1)]
         }
         if (lower > upper){
-          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + upper + 1]
+          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + (upper + 1)]
         }
         shift <- 2945.6 - max
         spec_data[1, ] <- spec_data[1, ] + shift
@@ -129,7 +129,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
           max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower- 1)]
         }
         if (lower > upper){
-          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + upper + 1]
+          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + (upper + 1)]
         }
         shift <- 1615.1 - max
         spec_data[1, ] <- spec_data[1, ] + shift
@@ -165,7 +165,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
           max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower- 1)]
         }
         if (lower > upper){
-          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + upper + 1]
+          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + (upper + 1)]
         }
         shift <- 1005.3 - max
         spec_data[1, ] <- spec_data[1, ] + shift
