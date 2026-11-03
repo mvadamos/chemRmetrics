@@ -89,7 +89,12 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
       if (shift_correct == 'PLA'){
         lower <- which.min(abs(spec_data[1, ] - 2925.6))
         upper <- which.min(abs(spec_data[1, ] - 2965.6))
-        max <- spec_data[1, which.max(spec_data[2, min(c(upper, loweer)):max(c(upper, lower))]) + (min(c(upper, lower)) - 1)]
+        if (upper > lower){
+          max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower- 1)]
+        }
+        if (lower > upper){
+          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + upper]
+        }
         shift <- 2945.6 - max
         spec_data[1, ] <- spec_data[1, ] + shift
 
@@ -120,7 +125,12 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
       if (shift_correct == 'PETG'){
         lower <- which.min(abs(spec_data[1, ] - 1595.1))
         upper <- which.min(abs(spec_data[1, ] - 1635.1))
-        max <- spec_data[1, which.max(spec_data[2, min(c(upper, lower)):max(c(upper, lower))]) + (min(c(upper, lower)) - 1)]
+        if (upper > lower){
+          max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower- 1)]
+        }
+        if (lower > upper){
+          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + upper]
+        }
         shift <- 1615.1 - max
         spec_data[1, ] <- spec_data[1, ] + shift
 
@@ -151,7 +161,12 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
       if (shift_correct == 'ABS'){
         lower <- which.min(abs(spec_data[1, ] - 985.3))
         upper <- which.min(abs(spec_data[1, ] - 1025.3))
-        max <- spec_data[1, which.max(spec_data[2, min(c(upper, lower)):max(c(upper, lower))]) + (min(c(upper, lower)) - 1)]
+        if (upper > lower){
+          max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower- 1)]
+        }
+        if (lower > upper){
+          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + upper]
+        }
         shift <- 1005.3 - max
         spec_data[1, ] <- spec_data[1, ] + shift
 
