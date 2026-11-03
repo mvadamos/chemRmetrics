@@ -63,7 +63,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
     if (shift_correct == 'PETG'){
       lower <- which.min(abs(raw_spectra[1, ] - 1595.1))
       upper <- which.min(abs(raw_spectra[1, ] - 1635.1))
-      max <- raw_spectra[1, which.max(raw_spectra[2, min(c(upper, lower):max(c(upper, lower))]) + min(c(upper, lower))]
+      max <- raw_spectra[1, which.max(raw_spectra[2, min(c(upper, lower)):max(c(upper, lower))]) + min(c(upper, lower))]
       shift <- 1615.1 - max
       raw_spectra[1, ] <- raw_spectra[1, ] + shift
     }
@@ -93,7 +93,7 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
           max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower- 1)]
         }
         if (lower > upper){
-          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + (upper + 1)]
+          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + (upper - 1)]
         }
         shift <- 2945.6 - max
         spec_data[1, ] <- spec_data[1, ] + shift
@@ -126,10 +126,10 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
         lower <- which.min(abs(spec_data[1, ] - 1595.1))
         upper <- which.min(abs(spec_data[1, ] - 1635.1))
         if (upper > lower){
-          max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower- 1)]
+          max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower - 1)]
         }
         if (lower > upper){
-          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + (upper + 1)]
+          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + (upper - 1)]
         }
         shift <- 1615.1 - max
         spec_data[1, ] <- spec_data[1, ] + shift
@@ -162,10 +162,10 @@ load_data <- function(inpath, non_num, ftype, fstruc, delim, skip = 0, yvar, xva
         lower <- which.min(abs(spec_data[1, ] - 985.3))
         upper <- which.min(abs(spec_data[1, ] - 1025.3))
         if (upper > lower){
-          max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower- 1)]
+          max <- spec_data[1, which.max(spec_data[2, lower:upper]) + (lower - 1)]
         }
         if (lower > upper){
-          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + (upper + 1)]
+          max <- spec_data[1, which.max(spec_data[2, upper:lower]) + (upper - 1)]
         }
         shift <- 1005.3 - max
         spec_data[1, ] <- spec_data[1, ] + shift
